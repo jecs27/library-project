@@ -1,7 +1,7 @@
-import { Body, Controller,Get, Post, HttpCode, Delete, Param, Put } from '@nestjs/common';;
-import { CreateBook } from './dto/create-book.dto';
+import { Controller,Get, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';;
+import { CreateBookDTO } from './dto/Book.dto';
 
-import { Book } from './interfaces/Book';
+import { Book } from './interfaces/Book.interface';
 import { BooksService } from './books.service';
 
 @Controller('books')
@@ -22,15 +22,32 @@ export class BooksController {
   }
 
   @Post()
-  createBook(
-      @Body() req: CreateBook
+  CreateBookDTO(
+      @Res() res,
+      @Body() createBookDTO: CreateBookDTO
   ): {} {
-      return {
-          statusCode: 201,
-          mesage:'POST Done',
-          data:{}
-      };
+    console.log(createBookDTO);
+    
+    return res.status(HttpStatus.OK).json({
+      statusCode: 200,
+      mesage:'POST Done',
+      data:createBookDTO
+    });
   }
+
+  @Put(':id')
+  updateBook(
+      @Param('id') id,
+      @Body() createBookDTO: CreateBookDTO
+  ):{}{
+
+    return {
+        statusCode: 200,
+        mesage:`UPDATE Done ${id}`,
+        data:{}
+    };
+  }
+
 
   @Delete(':id')
   deleteBook(
@@ -40,19 +57,6 @@ export class BooksController {
     return {
         statusCode: 200,
         mesage:`DELETE Done ${id}`,
-        data:{}
-    };
-  }
-
-  @Put(':id')
-  updateBook(
-      @Param('id') id,
-      @Body() req: CreateBook
-  ):{}{
-
-    return {
-        statusCode: 200,
-        mesage:`UPDATE Done ${id}`,
         data:{}
     };
   }

@@ -1,46 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { Book } from './interfaces/Book';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
-
+import { Book } from './interfaces/Book.interface';
+import { CreateBookDTO } from './dto/Book.dto';
 @Injectable()
 export class BooksService {
+    constructor(@InjectModel('BooksModel') private readonly booksModel: Model<Book>){}
+        getBooks(){
 
-    books:Book[] = [
-        {
-            id:1,
-            isbn: 1,
-            title: 'string;',
-            description: 'string',
-            category: 1,
-            year_published: '1900',
-            publishin_house_id:1
-        },
-        {
-            id:2,
-            isbn: 2,
-            title: 'string;',
-            description: 'string',
-            category: 1,
-            year_published: '1900',
-            publishin_house_id:1
-        },
-        {
-            id:3,
-            isbn: 3,
-            title: 'string;',
-            description: 'string',
-            category: 1,
-            year_published: '1900',
-            publishin_house_id:1
         }
-    ];
-    
+        
+        getBook(){
 
-    getBooks(): Book[]{
-        return this.books;
-    }
+        }
 
-    getBook(id: number): Book {
-        return this.books.find(book => book.id === id)
-    }
+        createBook(){
+
+        }
+
+        deleteBook(){
+
+        }
+
+        updateBook(){
+            
+        }
 }
