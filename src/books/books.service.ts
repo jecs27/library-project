@@ -40,7 +40,7 @@ export class BooksService {
         return this.books;
     }
 
-    getBook(id): Book {
+    getBook(id: number): Book {
         return this.books.find(book => book.id === id)
     }
 }

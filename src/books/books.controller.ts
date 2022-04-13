@@ -1,5 +1,7 @@
 import { Body, Controller,Get, Post, HttpCode, Delete, Param, Put } from '@nestjs/common';;
 import { CreateBook } from './dto/create-book.dto';
+
+import { Book } from './interfaces/Book';
 import { BooksService } from './books.service';
 
 @Controller('books')
@@ -8,8 +10,15 @@ export class BooksController {
   constructor(private booksService: BooksService){}
   
   @Get()
-  getBooks(): {} {
+  getBooks(): Book[] {
     return this.booksService.getBooks();
+  }
+
+  @Get(':bookId')
+  getBook(
+    @Param('bookId') bookId
+  ): Book {
+    return this.booksService.getBook(parseInt(bookId));
   }
 
   @Post()
