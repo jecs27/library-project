@@ -34,4 +34,17 @@ export class BooksController {
     });
   }
 
+  @Get(':id')
+  async getBook(
+      @Res() res,
+      @Param('id') param: string
+  ){  
+    const objBook = await this.booksService.getBook(param);
+    return res.status(HttpStatus.OK).json({
+      statusCode: 200,
+      mesage:'GET Done',
+      data:objBook
+    });
+  }
+
 }
