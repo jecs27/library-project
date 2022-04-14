@@ -18,7 +18,19 @@ export class BooksController {
     return res.status(HttpStatus.OK).json({
       statusCode: 200,
       mesage:'POST Done',
-      data:{}
+      data:objBook
+    });
+  }
+
+  @Get()
+  async getBooks(
+      @Res() res,
+  ){
+    const arrBooks = await this.booksService.getBooks();
+    return res.status(HttpStatus.OK).json({
+      statusCode: 200,
+      mesage:'GET Done',
+      data:arrBooks
     });
   }
 
