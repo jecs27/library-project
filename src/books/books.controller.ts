@@ -10,7 +10,7 @@ export class BooksController {
   constructor(private booksService: BooksService){}
   
   @Post()
-  async createBookDTO(
+  async createBook(
       @Res() res,
       @Body() createBookDTO: CreateBookDTO
   ){
@@ -44,6 +44,33 @@ export class BooksController {
       statusCode: 200,
       mesage:'GET Done',
       data:objBook
+    });
+  }
+
+  @Delete(':id')
+  async deleteBook(
+      @Res() res, 
+      @Param('id') param: string
+  ){
+    const objBook = await this.booksService.deleteBook(param);
+    return res.status(HttpStatus.OK).json({
+      statusCode: 200,
+      mesage:'DELETE Done',
+      data:{}
+    });
+  }
+
+  @Put(':id')
+  async updateBook(
+      @Res() res,
+      @Body() createBookDTO: CreateBookDTO,
+      @Param('id') param: string
+  ){
+    const objBook = await this.booksService.updateBook(param, createBookDTO);
+    return res.status(HttpStatus.OK).json({
+      statusCode: 200,
+      mesage:'PUT Done',
+      data: objBook
     });
   }
 
